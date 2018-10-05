@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <!-- Page Content -->
+
+    <style>
+        .article-text {
+            margin-top: 10px;
+            font-size: 18px;
+            font-family: "Script MT Bold"
+        }
+
+        .comment_username {
+            margin-top: 0px;
+            font-size: 19px;
+            font-family: "Script MT Bold";
+            padding-left: 0px;
+        }
+
+        .comment_pubdate {
+            padding-right: 20px;
+            margin-right: 0px;
+            font-size: 12px;
+        }
+
+        .comment1 {
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <!-- Post Content Column -->
+
+            <div class="col-lg-8">
+
+                <!-- Title -->
+
+                <h2 class="mt-4">{{ object.title }}</h2>
+                <hr>
+
+                <!-- Date/Time -->
+
+                <p>Posted on {{ object.pub_date }}</p>
+
+                <!-- Preview Image -->
+
+                <img class="img-fluid rounded" src="{{ object.image.url }}" alt=""/>
+
+                <!-- Post Content -->
+
+                <p class="article-text">{{ object.text }}</p>
+
+                <hr>
+                <h4 align="left">Comments({{ total_comments }})</h4>
+                <!-- Comments Form -->
+                <hr>
+                <div class="container">
+
+
+                    {% if request.user.is_authenticated %}
+                        <!-- Comments Form -->
+                        <div class="card my-4">
+
+                            <h5 class="card-header">Leave a Comment:</h5>
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <textarea id="comment" name="comment" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% for i in sorted_comments.items %}
+                            <div class="media">
+
+                                <div class="media-left">
+                                    <img src="{{ i.0.user.avatar.url }}" class="media-object"
+                                         style="width:45px">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ i.0.user.username }}
+                                        <small><i>Posted on {{ i.0.pub_date }} </i></small>
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="collapse"
+                                                data-target="#com{{ i.0.pk }}">Reply
+                                        </button>
+                                    </h4>
+                                    <p>{{ i.0.comment_text }}</p>
+                                    <div id="com{{ i.0.pk }}" class="collapse">
+                                        <form method="post"
+                                              action="{% url 'football:add_second_comment' slug=object.slug com_pk=i.0.pk %}">
+                                            {% csrf_token %}
+                                            {% if not user.is_authenticated %}
+                                                <div class="form-group">
+                                                    <textarea id="comment" name="comment" class="form-control"
+                                                              rows="3"></textarea>
+                                                </div>
+                                            {% else %}
+                                                <div class="form-group">
+                                                    <textarea id="comment" name="comment" class="form-control"
+                                                              rows="3"></textarea>
+                                                </div>
+                                            {% endif %}
+                                            <button type="submit">Add Comment</button>
+                                        </form>
+                                        <hr>
+                                    </div>
+                                    <!-- Nested media object -->
+                                    {% for j in i.1 %}
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <img src="{{ j.user.avatar.url }}"
+                                                     class="media-object"
+                                                     style="width:45px">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-hedding">{{ j.user.username }}
+                                                    <small><i>Posted on {{ j.pub_date }}</i></small>
+                                                </h4>
+                                                <p>{{ j.comment_text }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+
+                        {% for i in sorted_comments.items %}
+                            <div class="media">
+
+                                <div class="media-left">
+                                    <img src="{{ i.0.user.avatar.url }}" class="media-object"
+                                         style="width:45px">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ i.0.user.username }}
+                                        <small><i>Posted on {{ i.0.pub_date }} </i></small>
+                                    </h4>
+                                    <p>{{ i.0.comment_text }}</p>
+
+                                    <!-- Nested media object -->
+                                    {% for j in i.1 %}
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <img src="{{ j.user.avatar.url }}"
+                                                     class="media-object"
+                                                     style="width:45px">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-hedding">{{ j.user.username }}
+                                                    <small><i>Posted on {{ j.pub_date }}</i></small>
+                                                </h4>
+                                                <p>{{ j.comment_text }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

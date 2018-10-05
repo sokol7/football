@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <h2>{{ object.title }}</h2>
+    <h4>{{ object.pub_date }}</h4>
+    <img src="{{ object.image.url }}"/>
+    {{ object.text }}
+    <hr>
+    <div class="container">
+
+
+        {% if request.user.is_authenticated %}
+            <!-- Comments Form -->
+            <div class="card my-4">
+
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea id="comment" name="comment" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            {% for i in sorted_comments.items %}
+            <div class="media">
+
+                <div class="media-left">
+                    <img src="https://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object"
+                         style="width:45px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <small><i>Posted on {{ i.0.pub_date }} </i></small>
+                        <button type="button" class="btn btn-info btn-xs" data-toggle="collapse"
+                                data-target="#com{{ i.0.pk }}">Reply
+                        </button>
+                    </h4>
+                    <p>{{ i.0.comment_text }}</p>
+                    <div id="com{{ i.0.pk }}" class="collapse">
+                        <form method="post"
+                              action="{% url 'football:add_second_comment' slug=object.slug com_pk=i.0.pk %}">
+                            {% csrf_token %}
+                            {% if not user.is_authenticated %}
+                                <div class="form-group">
+                                    <textarea id="comment" name="comment" class="form-control" rows="3"></textarea>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <textarea id="comment" name="comment" class="form-control" rows="3"></textarea>
+                                </div>
+                            {% endif %}
+                            <button type="submit">Add Comment</button>
+                        </form>
+                        <hr>
+                    </div>
+                    <!-- Nested media object -->
+                    {% for j in i.1 %}
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="https://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object"
+                                     style="width:45px">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-hedding">Username
+                                    <small><i>Posted on {{ j.pub_date }}</i></small>
+                                </h4>
+                                <p>{{ j.comment_text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+
+            {% for i in sorted_comments.items %}
+                <div class="media">
+
+                <div class="media-left">
+                    <img src="https://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object"
+                         style="width:45px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <small><i>Posted on {{ i.0.pub_date }} </i></small>
+                    </h4>
+                    <p>{{ i.0.comment_text }}</p>
+
+                    <!-- Nested media object -->
+                    {% for j in i.1 %}
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="https://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object"
+                                     style="width:45px">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-hedding">Username
+                                    <small><i>Posted on {{ j.pub_date }}</i></small>
+                                </h4>
+                                <p>{{ j.comment_text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+                </div>
+                {% endfor %}
+        {% endif %}
+
+    </div>
+{% endblock %}

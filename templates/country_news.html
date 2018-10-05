@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+        <h1> {{country.title}} news</h1>
+        <div>
+        {% for i in news %}
+            <li><a  href="/football/news_page/{{ i.slug }}">{{ i.title }}</a></li>
+        {% endfor %}
+        </div>
+{% endblock %}
