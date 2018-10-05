@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, DetailView, UpdateView
 from football.forms import RegistrationForm, CommentForm
 from django.contrib.auth import login, authenticate
 from django.contrib.postgres import search
+#312321
 
 class HomePage(TemplateView):
     template_name = 'index.html'
