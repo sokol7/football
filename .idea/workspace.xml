@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="47a71d83-aca5-4484-9188-b94411aca101" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="47a71d83-aca5-4484-9188-b94411aca101" name="Default" comment="deleted extra comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/football/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/football/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/football/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/football/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/football/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/football/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +95,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/football/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
+            <state relative-caret-position="4">
               <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
@@ -174,6 +170,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -360,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538769729722</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="deleted extra comments">
+      <created>1539023102552</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1539023102552</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -397,7 +401,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.19381443" side_tool="true" weight="0.22424242" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47881997" visible="true" weight="0.42326334" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.47881997" visible="true" weight="0.11470113" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -445,7 +449,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add a comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a comment" />
+    <MESSAGE value="deleted extra comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted extra comments" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/django/contrib/auth/base_user.py" />
@@ -674,7 +679,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/football/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
+        <state relative-caret-position="4">
           <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
           <folding>
             <element signature="e#0#95#0" expanded="true" />
