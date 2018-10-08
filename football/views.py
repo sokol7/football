@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from .models import Country, NewsPage, Comment, UserProfile
 from django.views.generic import TemplateView, DetailView, UpdateView
 from football.forms import RegistrationForm, CommentForm
 from django.contrib.auth import login, authenticate
-from django.contrib.postgres import search
-#312321
+
 
 class HomePage(TemplateView):
     template_name = 'index.html'
@@ -58,7 +57,7 @@ class ShowNewsPage(DetailView):
         context['sorted_comments'] = {}
 
         for i in context['comments']:
-            if i.father_comment == None:
+            if i.father_comment is None:
                 parent_comments.append(i)
             else:
                 sub_comments.append(i)
@@ -73,7 +72,7 @@ class ShowNewsPage(DetailView):
 
         for i in sorted_comments:
             for j in i.items():
-                    context['sorted_comments'][j[0]]=j[1]
+                    context['sorted_comments'][j[0]] = j[1]
 
         context['form'] = CommentForm()
 
@@ -84,7 +83,6 @@ class ShowNewsPage(DetailView):
         print(total_comments)
 
         return context
-
 
     def post(self,request, *args, **kwargs):
         comment = Comment()
@@ -135,14 +133,14 @@ class Account(UpdateView):
     fields = ('avatar',)
     success_url = '/'
 
-    print(UserProfile.user)
-    print('Go')
 
     def get_object(self):
         queryset = self.get_queryset()
         queryset = queryset.filter(username=self.request.user.username)
         obj = get_object_or_404(queryset)
+
         return obj
+
 
 def search(request):
     context_dict = {}
@@ -150,4 +148,3 @@ def search(request):
     query = request.GET.get('q')
     context_dict['results'] = NewsPage.objects.filter(text__search=query)
     return render(request, 'search_results.html', context_dict)
-

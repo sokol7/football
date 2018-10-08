@@ -6,7 +6,7 @@ from football.models import Comment
 
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required= True)
+    email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30, required=False, help_text='optional')
     last_name = forms.CharField(max_length=30, required=False, help_text='optional')
 
@@ -20,6 +20,7 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2'
         )
+
 
 class CommentForm(ModelForm):
     class Meta:

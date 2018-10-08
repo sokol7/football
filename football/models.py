@@ -18,6 +18,7 @@ class Country(models.Model):
     def __str__(self):
         return self.title
 
+
 class NewsPage(models.Model):
     text = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
@@ -45,16 +46,15 @@ class UserProfile(models.Model):
         self.username = self.user.username
         super(UserProfile, self).save(*args, **kwargs)
 
-
     def __str__(self):
         return self.user.username
 
 
 class Comment(models.Model):
-    comment_text = models.CharField(max_length=99999)
+    comment_text = models.CharField(max_length=1024)
     pub_date = models.DateTimeField(auto_now=True)
     news_page = models.ForeignKey(NewsPage, default='')
-    user= models.ForeignKey(UserProfile, default='')
+    user = models.ForeignKey(UserProfile, default='')
     father_comment = models.ForeignKey('self', null=True, blank=True)
 
     def __str__(self):
