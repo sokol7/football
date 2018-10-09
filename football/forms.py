@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from football.models import Comment
+from football.models import Comment, UserProfile
 
 
 class RegistrationForm(UserCreationForm):
@@ -26,3 +26,9 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['comment_text']
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ('slug', 'user',)

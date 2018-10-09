@@ -11,23 +11,6 @@
             font-family: "Script MT Bold"
         }
 
-        .comment_username {
-            margin-top: 0px;
-            font-size: 19px;
-            font-family: "Script MT Bold";
-            padding-left: 0px;
-        }
-
-        .comment_pubdate {
-            padding-right: 20px;
-            margin-right: 0px;
-            font-size: 12px;
-        }
-
-        .comment1 {
-            padding-top: 90px;
-            padding-bottom: 90px;
-        }
     </style>
 
     <div class="container">
@@ -63,7 +46,6 @@
                     {% if request.user.is_authenticated %}
                         <!-- Comments Form -->
                         <div class="card my-4">
-
                             <h5 class="card-header">Leave a Comment:</h5>
                             <div class="card-body">
                                 <form method="post">
@@ -79,8 +61,14 @@
                             <div class="media">
 
                                 <div class="media-left">
-                                    <img src="{{ i.0.user.avatar.url }}" class="media-object"
-                                         style="width:45px">
+                                    {% if i.0.user.avatar %}
+                                        <img src="{{ i.0.user.avatar.url }}" class="media-object"
+                                             style="width:45px">
+                                    {% else %}
+                                        <img src="http://journalnetwork.org/assets/default-profile-54364fb08cf8b2a24e80ed8969012690.jpg"
+                                             class="media-object"
+                                             style="width:45px">
+                                    {% endif %}
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">{{ i.0.user.username }}
@@ -113,9 +101,15 @@
                                     {% for j in i.1 %}
                                         <div class="media">
                                             <div class="media-left">
-                                                <img src="{{ j.user.avatar.url }}"
-                                                     class="media-object"
-                                                     style="width:45px">
+                                                {% if j.user.avatar %}
+                                                    <img src="{{ j.user.avatar.url }}"
+                                                         class="media-object"
+                                                         style="width:45px">
+                                                {% else %}
+                                                    <img src="http://journalnetwork.org/assets/default-profile-54364fb08cf8b2a24e80ed8969012690.jpg"
+                                                         class="media-object"
+                                                         style="width:45px">
+                                                {% endif %}
                                             </div>
                                             <div class="media-body">
                                                 <h4 class="media-hedding">{{ j.user.username }}
@@ -135,8 +129,14 @@
                             <div class="media">
 
                                 <div class="media-left">
+                                    {% if i.0.user.avatar %}
                                     <img src="{{ i.0.user.avatar.url }}" class="media-object"
                                          style="width:45px">
+                                                                                    {% else %}
+                                                    <img src="http://journalnetwork.org/assets/default-profile-54364fb08cf8b2a24e80ed8969012690.jpg"
+                                                         class="media-object"
+                                                         style="width:45px">
+                                                {% endif %}
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">{{ i.0.user.username }}
@@ -148,9 +148,15 @@
                                     {% for j in i.1 %}
                                         <div class="media">
                                             <div class="media-left">
+                                                {% if j.user.avatar %}
                                                 <img src="{{ j.user.avatar.url }}"
                                                      class="media-object"
                                                      style="width:45px">
+                                                                                                {% else %}
+                                                    <img src="http://journalnetwork.org/assets/default-profile-54364fb08cf8b2a24e80ed8969012690.jpg"
+                                                         class="media-object"
+                                                         style="width:45px">
+                                                {% endif %}
                                             </div>
                                             <div class="media-body">
                                                 <h4 class="media-hedding">{{ j.user.username }}

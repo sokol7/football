@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from .models import Country, NewsPage, Comment, UserProfile
 from django.views.generic import TemplateView, DetailView, UpdateView
-from football.forms import RegistrationForm, CommentForm
+from football.forms import RegistrationForm, CommentForm, ProfileForm
 from django.contrib.auth import login, authenticate
 
 
@@ -124,22 +124,33 @@ def signup(request):
 
     else:
         form = RegistrationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 class Account(UpdateView):
     template_name = 'registration/account.html'
     model = UserProfile
-    fields = ('avatar',)
     success_url = '/'
+    form_class = ProfileForm
 
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        a = super(Account, self).post(request, *args, **kwargs)
+        return a
+        return super(Account, self).post(request, *args, **kwargs)
 
-    def get_object(self):
-        queryset = self.get_queryset()
-        queryset = queryset.filter(username=self.request.user.username)
-        obj = get_object_or_404(queryset)
+    def get(self, request, *args, **kwargs):
+        a = super(Account, self).get(request, *args, **kwargs)
+        return a
+        return super(Account, self).post(request, *args, **kwargs)
 
-        return obj
+    # def get_object(self):
+    #     queryset = self.get_queryset()
+    #     queryset = queryset.filter(user__username=self.request.user.username)
+    #     print(queryset)
+    #     obj = get_object_or_404(queryset)
+    #
+    #     return obj
 
 
 def search(request):
@@ -147,4 +158,5 @@ def search(request):
     context_dict['countries'] = Country.objects.all()
     query = request.GET.get('q')
     context_dict['results'] = NewsPage.objects.filter(text__search=query)
+    context_dict['query'] = query
     return render(request, 'search_results.html', context_dict)

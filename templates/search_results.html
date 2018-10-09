@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
     {% if results %}
-    {% for i in results %}
+        {% for i in results %}
 
             <ul>
                 <li><a href="{% url 'football:news_page' slug=i.slug %}">{{ i.title }}</a></li>
             </ul>
-    {% endfor %}
-            {% else %}
-
-        {% endif %}
+        {% endfor %}
+    {% else %}
+        No matching results found for query: "{{ query }}"
+    {% endif %}
 {% endblock %}

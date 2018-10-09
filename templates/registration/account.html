@@ -50,16 +50,15 @@
         {% else %}
             <img src="">
         {% endif %}
-        <p>Username: {{ object.user.username }}</p>
+        <p>Username: {{ object.username }}</p>
         <p>First name: {{ object.user.first_name }}</p>
         <p>Last name: {{ object.user.last_name }}</p>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" >
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Submit</button>
         </form>
 
-        <p></p>
 
         <p>
             <a href="{% url 'football:logged_out' %}">
