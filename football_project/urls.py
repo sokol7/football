@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^football/', include('football.urls',namespace='football')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomePage.as_view(), name='homepage'),
+    #url(r'^api-auth/', )
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

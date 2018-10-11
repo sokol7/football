@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'football.apps.FootballConfig',
     'debug_toolbar',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,33 @@
+from rest_framework import serializers
+from .models import Country, NewsPage, Comment, UserProfile
+
+class CountrySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Country
+        fields = ('id', 'title', 'slug')
+        read_only_fields = ('id', 'slug')
+
+
+class NewsPageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = NewsPage
+        fields = ('id', 'title', 'text', 'country', 'pub_date', 'slug', 'image')
+        read_only_fields = ('id', 'country', 'slug')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'comment_text', 'pub_date', 'news_page', 'user', 'father_comment')
+        read_only_fields = ('id', 'comment_text', 'pub_date', 'news_page', 'user', 'father_comment')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserProfile
+        fields = ('username', 'avatar', 'slug', 'user')
+        read_only_fields = ('username', 'slug', 'user')

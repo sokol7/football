@@ -83,7 +83,7 @@
 
                 </li>
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url "football:profile" pk=request.user.pk%}">My Account </a></li>
+                    <li><a href="{% url "football:profile" %}">My Account </a></li>
 
                 {% else %}
                     <li><a href="{% url 'football:signup' %}"><span class="glyphicon glyphicon-log-in"></span> Sign in /

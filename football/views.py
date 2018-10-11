@@ -3,7 +3,8 @@ from .models import Country, NewsPage, Comment, UserProfile
 from django.views.generic import TemplateView, DetailView, UpdateView
 from football.forms import RegistrationForm, CommentForm, ProfileForm
 from django.contrib.auth import login, authenticate
-
+from rest_framework import generics
+from .serializers import CommentSerializer
 
 class HomePage(TemplateView):
     template_name = 'index.html'
@@ -144,13 +145,13 @@ class Account(UpdateView):
         return a
         return super(Account, self).post(request, *args, **kwargs)
 
-    # def get_object(self):
-    #     queryset = self.get_queryset()
-    #     queryset = queryset.filter(user__username=self.request.user.username)
-    #     print(queryset)
-    #     obj = get_object_or_404(queryset)
-    #
-    #     return obj
+    def get_object(self):
+        queryset = self.get_queryset()
+        queryset = queryset.filter(user__username=self.request.user.username)
+        print(queryset)
+        obj = get_object_or_404(queryset)
+
+        return obj
 
 
 def search(request):
@@ -160,3 +161,6 @@ def search(request):
     context_dict['results'] = NewsPage.objects.filter(text__search=query)
     context_dict['query'] = query
     return render(request, 'search_results.html', context_dict)
+
+# define api views
+
